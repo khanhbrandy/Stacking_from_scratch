@@ -95,22 +95,7 @@ class Model(Myvisualization):
                     C=10000, 
                     class_weight='balanced'
                     )
-        
-    def split_data(self, data, seed, re=False):
-        X, y = data.iloc[:,1:-1],data.iloc[:,-1]
-        # Train-Test split
-        test_size = 0.2
-        X_train_o, X_test, y_train_o, y_test = model_selection.train_test_split(X, y, test_size=test_size, random_state=seed)
-        # Resampling
-        if re:
-            resam=SMOTE(random_state=seed)
-            resam.fit(X_train_o, y_train_o)
-            X_train, y_train = resam.fit_resample(X_train_o, y_train_o)
-            X_train = pd.DataFrame(X_train, columns=X_train_o.columns)
-            y_train = pd.Series(y_train)
-        else:
-            X_train, y_train = X_train_o,y_train_o
-        return X, y, X_train, y_train, X_test, y_test
+    
 
     def generate_oof(self, clf, X_trainset, y_trainset, X_testset, n_fold, seed):
         print('Start getting out of fold set for {}...'.format(clf.__class__.__name__))

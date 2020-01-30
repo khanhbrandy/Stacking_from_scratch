@@ -13,10 +13,18 @@ import brandy_model
 import joblib
 import warnings
 
+def preprocess_data(seed):
+    profile = brandy_profile.Profile()
+    interest = brandy_interest.Interest()
+    preprocess = brandy_preprocess.Preprocessor()    
+    profile_raw = profile.get_profile()
+    interest_raw, ids = interest.data_merge()
+    data = preprocess.finalize_data(profile_raw, interest_raw)
+    X, y, X_train, y_train, X_test, y_test = preprocess.split_data(data, seed=seed, re=False)
+    return X, y, X_train, y_train, X_test, y_test
 
-def build_model(data, clf_list, seed):
+def build_model(X_train, y_train, X_test, y_test, clf_list, n_fold, seed):
     model = brandy_model.Model()
-    X, y, X_train, y_train, X_test, y_test = model.split_data(data, seed=seed, re=False)
     oof_train = []
     oof_test = []
     for clf in clf_list:
@@ -34,19 +42,13 @@ def build_model(data, clf_list, seed):
 if __name__=='__main__':
     print('*'*100) 
     print('*'*100+'\n')
-    model = brandy_model.Model()
-    profile = brandy_profile.Profile()
-    interest = brandy_interest.Interest()
-    preprocess = brandy_preprocess.Preprocessor()
     seed = 50
     n_fold = 5
+    model = brandy_model.Model()
+    X, y, X_train, y_train, X_test, y_test = preprocess_data(seed)
     clf_list = [model.clf_0, model.clf_2]
-    profile_raw = profile.get_profile()
-    interest_raw, ids, fbids_lv1, fbids_lv2, fbids_lv3, fbids_lv4, fbids_lv5 = interest.data_merge()
-    # interest_raw.to_excel('interest.xlsx')
-    data = preprocess.finalize_data(profile_raw, interest_raw)
     warnings.filterwarnings('ignore', category=FutureWarning)
-    meta_clf = build_model(data, clf_list, seed)
+    meta_clf = build_model(X_train, y_train, X_test, y_test, clf_list, n_fold, seed)
     print('*'*100) 
     print('*'*100+'\n')
 
