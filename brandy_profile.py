@@ -64,10 +64,10 @@ class Profile:
         profile_data=profile_data.reset_index()
         return profile_data
 
-    def get_profile(self):
+    def get_profile(self, profile_link):
         print('Start getting profile data for training...')
         start = time.time()
-        profile_data=pd.read_csv('training_data/MCREDIT_TRAINING_CLEAN_2_DEMO.csv', header = 0, converters={'FACEBOOK_ID':str,'AGE':int,'GB':str})
+        profile_data=pd.read_csv(profile_link, header = 0, converters={'FACEBOOK_ID':str,'AGE':int,'GB':str})
         profile_data=profile_data[profile_data['GB']!='2']
         profile_data['AGE_RANGE'] = profile_data['AGE'].map(self.age_bin)
         profile_data['RELATIONSHIP_FIVE9']=profile_data['RELATIONSHIP_FIVE9'].map(self.rls_convert)
