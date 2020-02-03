@@ -138,7 +138,7 @@ class Model(Myvisualization):
         precision_scr = self.precision_score(y_test, y_pred)
         recall_scr = self.recall_score(y_test, y_pred)
         print('Accuracy: {:.2f}%'.format(acc * 100))
-        print('Meta Classifier AUC: {:.2f}%.\n'.format(roc_auc*100))
+        print('Meta Classifier AUC: {:.2f}%'.format(roc_auc*100))
         print('Precision score: {:.2f}'.format(float(precision_scr)))
         print('Recall score: {:.2f}'.format(float(recall_scr)))
         print('Done fitting meta classifier. Time taken = {:.1f}(s) \n'.format(time.time()-start))
