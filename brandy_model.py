@@ -130,6 +130,7 @@ class Model(Myvisualization):
         start = time.time()
         model.fit(X_train, y_train)
         # Get predictions
+        y_pred = model.predict(X_test)
         y_pred_proba = model.predict_proba(X_test)[:,1]
         # Accuracy
         acc = self.accuracy(y_test, y_pred)
