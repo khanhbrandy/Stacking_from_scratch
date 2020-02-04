@@ -108,7 +108,7 @@ class Model(Myvisualization):
             y_train, y_test = y_trainset.iloc[train_idx],y_trainset.iloc[test_idx]
             clf.fit(X_train, y_train)
             oof_train[test_idx] = clf.predict_proba(X_test)[:,1]
-            print('Base classifier {} has \n AUC = {:.2f} \n Accuracy = {:.2f}% \n Precision score: {:.2f} \n Recall score: {:.2f}'.format(clf.__class__.__name__+'_'+str(i), 
+            print('Base classifier {}: AUC = {:.2f} | Accuracy = {:.2f}% | Precision score: {:.2f} | Recall score: {:.2f}'.format(clf.__class__.__name__+'_'+str(i), 
                                                                                     self.auc_score(y_test, clf.predict_proba(X_test)[:,1]), 
                                                                                     self.accuracy(y_test, clf.predict(X_test)),
                                                                                     float(self.precision_score(y_test, clf.predict(X_test))),
