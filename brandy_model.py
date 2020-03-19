@@ -13,7 +13,6 @@ from lightgbm import LGBMClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.externals import joblib
-from imblearn.over_sampling import SMOTE
 import matplotlib.pyplot as plt
 from sklearn.model_selection import StratifiedKFold
 
