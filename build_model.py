@@ -39,13 +39,13 @@ if __name__=='__main__':
     seed = 50
     n_fold = 5
     level_list = [
-        {'level':'LV1', 'link':'training_data/MCREDIT_TRAINING_CLEAN_LV1.csv'},
-        {'level':'LV2', 'link':'training_data/MCREDIT_TRAINING_CLEAN_LV2.csv'},
-        {'level':'LV3', 'link':'training_data/MCREDIT_TRAINING_CLEAN_LV3.csv'},
-        {'level':'LV4', 'link':'training_data/MCREDIT_TRAINING_CLEAN_LV4.csv'},
-        {'level':'LV5', 'link':'training_data/MCREDIT_TRAINING_CLEAN_LV5.csv'}]
+        {'level':'LV1', 'link':'training_data/M_TRAINING_CLEAN_LV1.csv'},
+        {'level':'LV2', 'link':'training_data/M_TRAINING_CLEAN_LV2.csv'},
+        {'level':'LV3', 'link':'training_data/M_TRAINING_CLEAN_LV3.csv'},
+        {'level':'LV4', 'link':'training_data/M_TRAINING_CLEAN_LV4.csv'},
+        {'level':'LV5', 'link':'training_data/M_TRAINING_CLEAN_LV5.csv'}]
     model = brandy_model.Model()
-    profile_link = 'training_data/MCREDIT_TRAINING_CLEAN_2_DEMO.csv'
+    profile_link = 'training_data/M_TRAINING_CLEAN_2_DEMO.csv'
     X, y, X_train, y_train, X_test, y_test = preprocess_data(profile_link, level_list, seed)
     warnings.filterwarnings('ignore', category=FutureWarning)
     meta_clf, meta_train, meta_test = build_model(X_train, y_train, X_test, y_test, n_fold, seed)
